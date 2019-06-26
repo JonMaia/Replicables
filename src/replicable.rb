@@ -28,7 +28,7 @@ module Replica
     end
   end
 
-  # Esto no pisa el metodo y no se por que, si anda esto anda el TP
+  # Esto no pisa el metodo y no se por que, si anda esto andia el TP
   def self.method_added(name)
   #define_method(:method_added)do |name| # Otra forma de definirlo
     puts "Metodo a agregar #{name.to_s}"
