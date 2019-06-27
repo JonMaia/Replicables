@@ -43,7 +43,6 @@ describe 'replicable' do
       expect(alguito.numero).to eq 37
 
       expect(copion.numero).to eq 37
-
     end
 
 

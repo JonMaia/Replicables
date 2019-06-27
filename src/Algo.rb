@@ -4,7 +4,6 @@ class Algo
 
   attr_accessor :numero
   def setear_numero(n)
-    puts "Recibo setar numero con: #{n}" # Solo para debug
     @numero = n
   end
 end
