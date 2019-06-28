@@ -57,28 +57,5 @@ describe 'replicable' do
 
   end
 
-=begin
-  context 'Registro de mesajes' do
-    it 'objeto retorna los mensajes recibidos' do
-
-      Monstruo.class_eval("replicable")
-      monstruo = Monstruo.new
-      monstruo.nombre = "James P Sullivan"
-      monstruo.entrarEn("Puerta de Tomy")
-      monstruo.asustarA("Tomy")
-      monstruo.cobrarSueldo(1200)
-
-      expect(monstruo.messages_history.messages_history).to eq([[:nombre=, "James P Sullivan"],
-                                               [:entrarEn, "Puerta de Tomy"],
-                                               [:asustarA, "Tomy"],
-                                               [:cobrarSueldo, 1200]])
-    end
-
-
-
-  end
-=end
-
-
 
 end

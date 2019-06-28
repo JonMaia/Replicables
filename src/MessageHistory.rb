@@ -13,6 +13,11 @@ class MessageHistory
   end
 
   def apply_to(obj)
-    # Queda pendiente
+    @msgs_history.each do |msg_history|
+      msg = msg_history[0]
+      args = msg_history[1]
+      obj.send(msg,*args)
+    end
   end
+
 end
