@@ -1,10 +1,11 @@
-
+require_relative '../src/MessageHistory'
 
 module Replica
 
+
   def initialize
-    var_name = "@mirrors"
-    self.instance_variable_set(var_name.to_sym,Array.new)
+    @mirrors =Array.new
+    @messages_history = MessageHistory.new
   end
 
   def mirrors
@@ -20,6 +21,7 @@ module Replica
        alias_method original_method, name
        define_method(name) do |*args|
          self.fordward_msg_to_mirrors(name, *args)
+         self.record_msg(name,*args)
          self.send(original_method, *args)
        end
        @added = false
@@ -39,6 +41,15 @@ module Replica
       mirror.send(method_name,*args)
     end
   end
+
+  def record_msg(msg,*args)
+      @messages_history.add_history_record(msg,*args)
+  end
+
+  def messages_history
+    @messages_history
+  end
+
 
 end
 

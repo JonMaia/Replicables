@@ -1,4 +1,7 @@
+require_relative '../src/replicable'
+
 Module.include(Replicable)
+
 class Algo
   replicable
 
