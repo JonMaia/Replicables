@@ -42,5 +42,23 @@ describe 'replicable con registro de mensajes' do
     end
 
 
+    it 'mirror de monstruoCopion recibe el fordward de los metodos aplicados a monstruoCopion' do
+      monstruo = Monstruo.new
+      monstruo.nombre = "James P Sullivan"
+      monstruo.entrarEn("Puerta de Tomy")
+      monstruo.asustarA("Tomy")
+      monstruo.cobrarSueldo(1200)
+      monstruo.entrenar
+      monstruo.dormir(20,"la cama de Tomy")
+
+      mirror_monstruo_copion = Monstruo.new
+      monstruo_copion = Monstruo.new
+      monstruo_copion.addMirror(mirror_monstruo_copion)
+
+      monstruo.messages_history.apply_to(monstruo_copion)
+      expect(monstruo_copion.messages_history.messages_history).to eq(monstruo.messages_history.messages_history)
+      expect(mirror_monstruo_copion.messages_history.messages_history).to eq(monstruo.messages_history.messages_history)
+    end
+
   end
 end
