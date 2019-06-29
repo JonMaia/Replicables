@@ -1,5 +1,7 @@
 require 'rspec'
+require_relative '../src/replicable'
 require_relative '../src/Monstruo'
+
 
 describe 'replicable con registro de mensajes' do
 
