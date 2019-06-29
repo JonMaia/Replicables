@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../src/Algo'
+require_relative '../src/replicable'
 
 
 describe 'replicable' do
@@ -53,6 +54,12 @@ describe 'replicable' do
 
       alguito.deleteMirror(copion)
       expect(alguito.mirrors) == []
+
+      copion.setear_numero(15)
+      alguito.setear_numero(37)
+
+      expect(copion.numero).to eq(15)
+
     end
 
   end

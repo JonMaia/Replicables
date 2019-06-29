@@ -1,31 +1,33 @@
 require_relative '../src/MessageHistory'
 
+
+module MetodoCopiableYRegistable
+
+  def method_added(name)
+    return if @added
+    @added = true
+    original_method = "original_#{name}"
+    alias_method original_method, name
+    define_method(name) do |*args|
+      self.fordward_msg_to_mirrors(name, *args)
+      self.record_msg(name,*args)
+      self.send(original_method, *args)
+    end
+    @added = false
+  end
+end
+
+
 module Replica
 
-
   def initialize
-    @mirrors =Array.new
+    @mirrors =Array.new(0)
     @messages_history = MessageHistory.new
   end
 
   def mirrors
     # Definido solo para testing
     @mirrors
-  end
-
-  def Replica.included(mod)
-    mod.define_singleton_method(:method_added) do |name|
-       return if @added
-       @added = true
-       original_method = "original_#{name}"
-       alias_method original_method, name
-       define_method(name) do |*args|
-         self.fordward_msg_to_mirrors(name, *args)
-         self.record_msg(name,*args)
-         self.send(original_method, *args)
-       end
-       @added = false
-     end
   end
 
   def addMirror(target)
@@ -37,9 +39,13 @@ module Replica
   end
 
   def fordward_msg_to_mirrors(method_name,*args)
-    @mirrors.each do |mirror|
-      mirror.send(method_name,*args)
-    end
+
+
+    #if @mirrors.length >= 1
+      @mirrors.each do |mirror|
+        mirror.send(method_name,*args)
+      end
+    #end
   end
 
   def record_msg(msg,*args)
@@ -49,14 +55,12 @@ module Replica
   def messages_history
     @messages_history
   end
-
-
 end
 
 
-
-module Replicable
+class Module
   def replicable
+    extend(MetodoCopiableYRegistable)
     include(Replica)
   end
 end
