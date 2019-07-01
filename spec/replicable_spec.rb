@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../src/Algo'
 require_relative '../src/replicable'
+require_relative '../src/Algo'
 
 
 describe 'replicable' do
@@ -61,8 +61,6 @@ describe 'replicable' do
       expect(copion.numero).to eq(15)
 
     end
-
   end
-
 
 end
